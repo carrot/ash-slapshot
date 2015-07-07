@@ -7,5 +7,4 @@ Slapshot_config_file_path="$Ash__call_directory/$Slapshot_config_file_name"
 
 Slapshot_prepare_variables() {
     eval $(YamlParse__parse "$Slapshot_config_file_path" "Slapshot_config_")
-    Logger__error "$Slapshot_config_project_type"
 }

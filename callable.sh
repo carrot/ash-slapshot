@@ -42,6 +42,12 @@ Slapshot__callable_upload(){
         return
     fi
 
+    # Validate Build
+    Slapshot_validate_build
+    if [[ $? -ne 1 ]]; then
+        return
+    fi
+
     # Start build
     Slapshot_pre_build
     Slapshot_build
