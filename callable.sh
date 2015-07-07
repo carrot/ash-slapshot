@@ -48,10 +48,12 @@ Slapshot__callable_upload(){
         return
     fi
 
+    # Reading flags
+    Slapshot_read_flags "$@"
+
     # Start build
     Slapshot_pre_build
     Slapshot_build
-    Slapshot_post_build
     Slapshot_upload
     Slapshot_post_upload
 }

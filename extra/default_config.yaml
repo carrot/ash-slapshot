@@ -1,6 +1,5 @@
-hockey_app_id:
-hockey_app_secret:
-git_upload_branch:
+hockey_app_api_token:
+git_upload_branch: master
 project_type: Android
-android_manifest_location:
-apk_location:
+android_manifest_location: app/src/main/AndroidManifest.xml
+apk_location: app/build/outputs/apk/app-debug.apk
