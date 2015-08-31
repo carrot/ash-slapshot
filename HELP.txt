@@ -1,0 +1,21 @@
+Usage:
+
+    slapshot:init
+        Initializes the current directory with a `slapshot_config.yaml` file
+        in the current directory, assuming the current directory is not
+        already initialized.
+
+        After running slapshot:init, you must edit the `slapshot_config.yaml`
+        file to make sure all of the values are correct.  If you have
+        initialized slapshot in the root of an Android project, it is likely
+        that the only value that you will have to edit is the
+        `hockey_app_api_token`.
+
+    slapshot:upload [--silent]
+        This will create a build, using the `slapshot_config.yaml` file in
+        the current working directory.
+
+        It will then upload the new build to HockeyApp.
+
+        Adding the `--silent` flag will prevent any email notifications
+        from HockeyApp to be sent out as a result of this build.
