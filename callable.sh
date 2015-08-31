@@ -8,7 +8,7 @@ Slapshot__callable_main(){
 }
 
 Slapshot__callable_help(){
-    Logger__log "TODO: Help"
+    more "$Ash__active_module_directory/HELP.txt"
 }
 
 Slapshot__callable_init(){
