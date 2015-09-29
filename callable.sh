@@ -50,6 +50,12 @@ Slapshot__callable_upload(){
         return
     fi
 
+    # Checking if APK file exists
+    if [[ ! -f "$Slapshot_config_apk_location" ]]; then
+        Logger__error "apk_location is not pointing to a file"
+        return
+    fi
+
     # Reading flags
     Slapshot_read_flags "$@"
 
