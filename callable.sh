@@ -24,26 +24,28 @@ Slapshot__callable_init(){
     fi
 }
 
-Slapshot__callable_upload(){
-    # Checking if we're initialized
-    if [[ ! -f "$Slapshot_config_file_path" ]]; then
-        Logger__error "Directory is not initialzed.  Run ash slapshot:init to get started"
+Slapshot__callable_build(){
+    # Preparing
+    Slapshot_prepare
+    if [[ $? -ne 1 ]]; then
         return
     fi
 
-    # Pulling in .yaml variables
-    Slapshot_prepare_variables
+    # Building
+    Slapshot_pre_build
+    Slapshot_build
 
-    # Loading in the proper project type
-    if [[ $Slapshot_config_project_type = "Android" ]]; then
-        . "$Slapshot_project_types_path/android.sh"
+    # Checking Success
+    if [[ $? -ne 0 ]]; then
+        Logger__error "Build failed.  Do not call \`upload\` until after a successful build"
     else
-        Logger__error "Invalid project_type"
-        return
+        Logger__success "Build Successful, you can now call upload to cut a new build on HockeyApp"
     fi
+}
 
-    # Validate Build
-    Slapshot_validate_build
+Slapshot__callable_upload(){
+    # Preparing
+    Slapshot_prepare
     if [[ $? -ne 1 ]]; then
         return
     fi
@@ -51,9 +53,7 @@ Slapshot__callable_upload(){
     # Reading flags
     Slapshot_read_flags "$@"
 
-    # Start build
-    Slapshot_pre_build
-    Slapshot_build
+    # Uploading
     Slapshot_upload
     Slapshot_post_upload
 }
