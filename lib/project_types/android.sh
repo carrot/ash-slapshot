@@ -30,11 +30,6 @@ Slapshot_validate_build() {
         return 0
     fi
 
-    if [[ ! -f "$Slapshot_config_apk_location" ]]; then
-        Logger__error "apk_location is not pointing to a file"
-        return 0
-    fi
-
     return 1
 }
 
