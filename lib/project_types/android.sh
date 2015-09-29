@@ -62,13 +62,12 @@ Slapshot_pre_build() {
     git pull origin "$Slapshot_config_git_upload_branch"
     git submodule update
 
-    # Updating version code
-    Slapshot_update_version_code
 }
 
 Slapshot_build() {
     Logger__warning "Building"
     ./gradlew build
+    return $?
 }
 
 Slapshot_upload() {
@@ -110,6 +109,9 @@ Slapshot_upload() {
 
 Slapshot_post_upload() {
     Logger__warning "Pushing version bump to remote"
+
+    # Updating version code
+    Slapshot_update_version_code
 
     # Committing
     git add "$Slapshot_config_android_manifest_location"
