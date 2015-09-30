@@ -55,4 +55,4 @@ There is currently not support for iOS.  If there is any interest we can explore
 
 ## License
 
-[MIT](license.txt)
+[MIT](LICENSE.txt)
