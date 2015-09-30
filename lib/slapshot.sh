@@ -11,14 +11,14 @@ Slapshot_config_file_path="$Ash__call_directory/$Slapshot_config_file_name"
 # Also validates if the directory
 # has been set up properly.
 #
-# @returns: 1 if prepared successfully,
-#           0 otherwise
+# @returns: 0 if prepared successfully,
+#           1 otherwise
 ##################################
 Slapshot_prepare() {
     # Checking if we're initialized
     if [[ ! -f "$Slapshot_config_file_path" ]]; then
         Logger__error "Directory is not initialzed.  Run ash slapshot:init to get started"
-        return 0
+        return 1
     fi
 
     # Pulling in .yaml variables
@@ -29,15 +29,15 @@ Slapshot_prepare() {
         . "$Slapshot_project_types_path/android.sh"
     else
         Logger__error "Invalid project_type"
-        return 0
+        return 1
     fi
 
     # Validate Build (project type specific)
     Slapshot_validate_build
-    if [[ $? -ne 1 ]]; then
-        return 0
+    if [[ $? -ne 0 ]]; then
+        return 1
     fi
 
     # Success
-    return 1
+    return 0
 }

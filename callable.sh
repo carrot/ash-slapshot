@@ -27,7 +27,7 @@ Slapshot__callable_init(){
 Slapshot__callable_build(){
     # Preparing
     Slapshot_prepare
-    if [[ $? -ne 1 ]]; then
+    if [[ $? -ne 0 ]]; then
         return
     fi
 
@@ -37,6 +37,7 @@ Slapshot__callable_build(){
 
     # Checking Success
     if [[ $? -ne 0 ]]; then
+        git checkout "$Slapshot_config_android_manifest_location"
         Logger__error "Build failed.  Do not call \`upload\` until after a successful build"
     else
         Logger__success "Build Successful, you can now call upload to cut a new build on HockeyApp"
@@ -46,7 +47,7 @@ Slapshot__callable_build(){
 Slapshot__callable_upload(){
     # Preparing
     Slapshot_prepare
-    if [[ $? -ne 1 ]]; then
+    if [[ $? -ne 0 ]]; then
         return
     fi
 
