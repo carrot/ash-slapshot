@@ -21,13 +21,19 @@ Before we get started, you're going to have to have to obtain a HockeyApp API to
 
 The API token must be set with access to `All Apps` and also have `Full Access` rights if the application hasn't been created yet (This is a requirement of HockeyApp's API).  After you've made your first upload, you are free to create an API Token with access to only your app.
 
-After we have our API token, we may in our application's base directory call:
+After you have your API token, export it in your [.ashrc file](https://github.com/BrandonRomano/ash#the-ashrc-file) to `SLAPSHOT_HOCKEYAPP_TOKEN`.
+
+```bash
+export SLAPSHOT_HOCKEYAPP_TOKEN="xxxxxxxxxxxxxxxxxxxxx"
+```
+
+After we have our API token setup, we may in our application's base directory call:
 
 ```bash
 ash slapshot:init
 ```
 
-You'll note a `slapshot_config.yaml` file has been created in the current directory.  Update the `hockey_app_api_token` variable to match your token, and we're now all set up (It's possible you may need to tweak the other variables depending on your setup, but the defaults should match a majority of use cases).
+You'll note a `slapshot_config.yaml` file has been created in the current directory.  It's possible you may need to tweak the other variables depending on your setup, but the defaults should match a majority of use cases.
 
 To cut a build we can now in the applications base directory run:
 

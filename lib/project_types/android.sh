@@ -5,11 +5,6 @@ Slapshot_last_push_file="slapshot-last-commit.txt"
 Slapshot_release_notes_file="release_notes.tmp.txt"
 
 Slapshot_validate_build() {
-    if [[ "$Slapshot_config_hockey_app_api_token" = "" ]]; then
-        Logger__error "No hockey_app_token provided in the slapshot_config.yaml file"
-        return 0
-    fi
-
     if [[ "$Slapshot_config_git_upload_branch" = "" ]]; then
         Logger__error "No git_upload_branch provided in the slapshot_config.yaml file"
         return 0
@@ -92,7 +87,7 @@ Slapshot_upload() {
       -F "notes=$release_notes" \
       -F "notes_type=1" \
       -F "ipa=@$Slapshot_config_apk_location" \
-      -H "X-HockeyAppToken: $Slapshot_config_hockey_app_api_token" \
+      -H "X-HockeyAppToken: $SLAPSHOT_HOCKEYAPP_TOKEN" \
       https://rink.hockeyapp.net/api/2/apps/upload
 
     # echo for linebreak (curl doesn't add a linebreak)
