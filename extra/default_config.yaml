@@ -1,4 +1,3 @@
-hockey_app_api_token:
 git_upload_branch: master
 project_type: Android
 android_manifest_location: app/src/main/AndroidManifest.xml
