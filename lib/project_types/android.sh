@@ -5,6 +5,11 @@ Slapshot_last_push_file="slapshot-last-commit.txt"
 Slapshot_release_notes_file="release_notes.tmp.txt"
 
 Slapshot_validate_build() {
+    if [[ "$SLAPSHOT_HOCKEYAPP_TOKEN" = "" ]]; then
+        Logger__error "No SLAPSHOT_HOCKEYAPP_TOKEN provided in the .ashrc file"
+        return 0
+    fi
+
     if [[ "$Slapshot_config_git_upload_branch" = "" ]]; then
         Logger__error "No git_upload_branch provided in the slapshot_config.yaml file"
         return 0
