@@ -10,11 +10,10 @@ Usage:
         initialized slapshot in the root of an Android project, it is likely
         that you will not need to edit any values.
 
-    slapshot:build
+    slapshot:upload [--silent]
         This will create a build, using the `slapshot_config.yaml` file in
         the current working directory.
 
-    slapshot:upload [--silent]
         This will then upload the current debug build to HockeyApp.
 
         Adding the `--silent` flag will prevent any email notifications
