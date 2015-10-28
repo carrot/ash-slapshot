@@ -1,4 +1,4 @@
 git_upload_branch: master
 project_type: Android
-android_manifest_location: app/src/main/AndroidManifest.xml
+android_app_gradle_location: app/build.gradle
 apk_location: app/build/outputs/apk/app-debug.apk

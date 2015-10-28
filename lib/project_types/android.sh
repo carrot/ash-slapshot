@@ -22,13 +22,13 @@ Slapshot_validate_build() {
         return 1
     fi
 
-    if [[ "$Slapshot_config_android_manifest_location" = "" ]]; then
-        Logger__error "No android_manifest_location provided in the slapshot_config.yaml file"
+    if [[ "$Slapshot_config_android_app_gradle_location" = "" ]]; then
+        Logger__error "No android_app_gradle_location provided in the slapshot_config.yaml file"
         return 1
     fi
 
-    if [[ ! -f "$Slapshot_config_android_manifest_location" ]]; then
-        Logger__error "android_manifest_location is not pointing to a file"
+    if [[ ! -f "$Slapshot_config_android_app_gradle_location" ]]; then
+        Logger__error "android_app_gradle_location is not pointing to a file"
         return 1
     fi
 
@@ -138,7 +138,7 @@ Slapshot_post_upload() {
     Logger__warning "Pushing version bump to remote"
 
     # Committing
-    git add "$Slapshot_config_android_manifest_location"
+    git add "$Slapshot_config_android_app_gradle_location"
     git commit -am ":new: Slapshot :new: Bumped version number"
     git push origin "$Slapshot_config_git_upload_branch"
 
@@ -152,19 +152,16 @@ Slapshot_post_upload() {
 
 ##################################
 # Bumps the versionCode value in
-# the Android Manifest
+# the Android Apps build.gradle
 ##################################
 Slapshot_update_version_code() {
-    local manifest="$Slapshot_config_android_manifest_location"
-    for line in `grep -o 'android:versionCode="[0-9].*"' $manifest`
-    do
-        versionCode=$(sed 's/[^0-9]//g' <<< ${line})
-        nextVersion=$(($versionCode + 1))
+    local gradle="$Slapshot_config_android_app_gradle_location"
 
-        cp "$manifest" "$manifest.buff"
-        sed "s/android:versionCode=\"$versionCode\"/android:versionCode=\"$nextVersion\"/" "$manifest.buff" > "$manifest"
-        rm "$manifest.buff"
+    version_code_line=$(grep -o "versionCode [0-9].*" $gradle)
+    version_code=$(sed 's/[^0-9]//g' <<< ${version_code_line})
+    next_version=$(($version_code + 1))
 
-        break
-    done
+    cp "$gradle" "$gradle.buff"
+    sed "s/versionCode $version_code/versionCode $next_version/" "$gradle.buff" > "$gradle"
+    rm "$gradle.buff"
 }
