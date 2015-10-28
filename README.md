@@ -38,12 +38,6 @@ You'll note a `slapshot_config.yaml` file has been created in the current direct
 To cut a build we can now in the applications base directory run:
 
 ```bash
-ash slapshot:build
-```
-
-After you receive a message logging that you have a successful build, you can now run:
-
-```bash
 ash slapshot:upload
 ```
 

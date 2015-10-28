@@ -24,7 +24,7 @@ Slapshot__callable_init(){
     fi
 }
 
-Slapshot__callable_build(){
+Slapshot__callable_upload(){
     # Preparing
     Slapshot_prepare
     if [[ $? -ne 0 ]]; then
@@ -40,27 +40,17 @@ Slapshot__callable_build(){
         git checkout "$Slapshot_config_android_manifest_location"
         Logger__error "Build failed.  Do not call \`upload\` until after a successful build"
     else
-        Logger__success "Build Successful, you can now call upload to cut a new build on HockeyApp"
+        # Checking if APK file exists
+        if [[ ! -f "$Slapshot_config_apk_location" ]]; then
+            Logger__error "apk_location is not pointing to a file"
+            return
+        fi
+
+        # Reading flags
+        Slapshot_read_flags "$@"
+
+        # Uploading
+        Slapshot_upload
+        Slapshot_post_upload
     fi
-}
-
-Slapshot__callable_upload(){
-    # Preparing
-    Slapshot_prepare
-    if [[ $? -ne 0 ]]; then
-        return
-    fi
-
-    # Checking if APK file exists
-    if [[ ! -f "$Slapshot_config_apk_location" ]]; then
-        Logger__error "apk_location is not pointing to a file"
-        return
-    fi
-
-    # Reading flags
-    Slapshot_read_flags "$@"
-
-    # Uploading
-    Slapshot_upload
-    Slapshot_post_upload
 }
