@@ -38,7 +38,7 @@ Slapshot__callable_upload(){
     # Checking Success
     if [[ $? -ne 0 ]]; then
         git checkout "$Slapshot_config_android_manifest_location"
-        Logger__error "Build failed.  Do not call \`upload\` until after a successful build"
+        Logger__error "Build failed"
     else
         # Checking if APK file exists
         if [[ ! -f "$Slapshot_config_apk_location" ]]; then
