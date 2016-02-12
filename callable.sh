@@ -1,8 +1,5 @@
 #!/bin/bash
 
-Ash__import "slapshot"
-Ash__import "yaml-parse"
-
 Slapshot__callable_main(){
     Slapshot__callable_help
 }
