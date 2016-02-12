@@ -1,5 +1,4 @@
 name: Slapshot
+package: github.com/carrot/ash-slapshot
+default_alias: slapshot
 callable_prefix: Slapshot
-version: 0.0.1
-author: Carrot Creative, Brandon Romano
-license: MIT
