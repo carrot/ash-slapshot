@@ -5,7 +5,7 @@ Slapshot__callable_main(){
 }
 
 Slapshot__callable_help(){
-    more "$Ash__active_module_directory/HELP.txt"
+    more "$Ash__ACTIVE_MODULE_DIRECTORY/HELP.txt"
 }
 
 Slapshot__callable_init(){
